@@ -8,6 +8,7 @@ import { doc, updateDoc, Timestamp } from "firebase/firestore";
 
 export default function UpdateUser() {
   const navigate = useNavigate();
+  const [name, setName] = useState(auth.currentUser.displayName);
   const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -21,7 +22,7 @@ export default function UpdateUser() {
       await updateDoc(doc(db, 'users', auth.currentUser.uid), {
         displayName: displayName
       }).then(() => {
-        navigate('/');
+        navigate(-1);
       }).catch((error) => {
         alert(error.message);
       });
@@ -37,7 +38,7 @@ export default function UpdateUser() {
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
               photoURL: downloadURL,
             });
-            navigate('/');
+            navigate(-1);
           } catch (error) {
             alert(error.message);
           }
@@ -57,7 +58,7 @@ export default function UpdateUser() {
               displayName: displayName,
               photoURL: downloadURL,
             });
-            navigate('/');
+            navigate(-1);
           } catch (error) {
             alert(error.message);
           }
@@ -75,7 +76,7 @@ export default function UpdateUser() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="display name" />
+        <input type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
         <input style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
         <label htmlFor="file">
           {/* <img src="" alt="img" /> */}

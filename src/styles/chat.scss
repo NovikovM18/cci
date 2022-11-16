@@ -2,12 +2,13 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  gap: 8px;
   
   &__messages {
-    width: 80%;
+    width: 100%;
   }
 
   .users {
-    width: 20%;
+    width: max-content;
   }
 }

@@ -6,11 +6,14 @@
 	.message__info {
 		display: flex;
 		flex-direction: column;
+    align-items: start;
 		color: #555;
     margin-bottom: 8px;
 
     &_user {
       display: flex;
+      gap: 4px;
+      align-items: center;
       img {
         width: 40px;
         height: 40px;
@@ -20,7 +23,7 @@
     }
     span {
       font-weight: 300;
-      font-size: 12px;
+      font-size: 10px;
       color: #777;
     }
 	}
@@ -32,8 +35,8 @@
 		gap: 10px;
 
 		p {
-      margin: 0;
-      padding: 0;
+			margin: 0;
+			padding: 0;
 			background-color: white;
 			padding: 8px 16px;
 			border-radius: 0px 12px 12px 12px;
@@ -47,11 +50,18 @@
 
 	&.owner {
     align-items: flex-end;
-    .message__info_user {
-      flex-direction: row-reverse;
+
+    .message__info{
+      align-items: flex-end;
+
+      &_user {
+        flex-direction: row-reverse;
+      }
     }
+
 		.message__content {
 			align-items: flex-end;
+
 			p {
 				background-color: cornflowerblue;
 				color: white;

@@ -14,7 +14,7 @@ export default function Dashboard() {
           <p className="logo__text">CIC</p>
         </Link>
 
-        <Link className="userInfo" to='/dashboard/updateuser'>
+        <Link className="user-info" to='/dashboard/updateuser'>
           <img src={user.photoURL} alt="" />
           <p>
             {user.displayName}

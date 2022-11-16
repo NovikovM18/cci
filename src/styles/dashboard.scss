@@ -48,12 +48,19 @@
     }
   }
 
-  .userInfo {
-    margin: 0 80px;
+  .user-info {
+    margin: 0 auto;
+    width: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 4px;
+    text-decoration: none;
+    color: #555;
+    border: 2px solid lightcoral;
+    border-radius: 8px;
+    background-color: rgba(240, 128, 128, 0.25);
+    cursor: pointer;
 
     img {
       width: 24px;
@@ -63,11 +70,14 @@
     }
 
     p {
-      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
     }
   }
 
   .nav {
+    margin-top: 12px;
     height: 32px;
     display: flex;
     flex-direction: row;
