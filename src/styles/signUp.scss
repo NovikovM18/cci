@@ -1,4 +1,5 @@
-.upd {
+.sUp {
+  padding-top: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +42,25 @@
     }
   }
   
+  &__links {
+    margin: 16px auto 0;
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    &_item {
+      text-decoration: none;
+      color: #555;
+      font-size: 12px;
+      transition: 300ms;
+      &:hover{
+        font-weight: 700;
+        transition: 300ms;
+      }
+    }
+  }
+
   &__image {
     margin-top: 24px;
     width: auto;

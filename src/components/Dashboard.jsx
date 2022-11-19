@@ -14,12 +14,14 @@ export default function Dashboard() {
           <p className="logo__text">CIC</p>
         </Link>
 
-        <Link className="user-info" to='/dashboard/updateuser'>
-          <img src={user.photoURL} alt="" />
-          <p>
-            {user.displayName}
-          </p>
-        </Link>
+        <div className="links">
+          <Link className="user-info" to='/dashboard/updateuser'>
+            <img src={user.photoURL} alt="" />
+            <p>
+              {user.displayName}
+            </p>
+          </Link>
+        </div>
         
         <LogOut />
 

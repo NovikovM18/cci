@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { updateProfile } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc, Timestamp } from "firebase/firestore";
+import { BiCamera } from 'react-icons/bi';
+import { BiX } from 'react-icons/bi';
 
 export default function UpdateUser() {
   const navigate = useNavigate();
@@ -70,21 +72,24 @@ export default function UpdateUser() {
   const filePreview = (event) => {
     const objectUrl = URL.createObjectURL(event.target.files[0]);
     setImage(objectUrl);
-    console.log(image);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='upd'>
+      <form onSubmit={handleSubmit} className='upd__form'>
         <input type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
-        <input style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
-        <label htmlFor="file">
-          {/* <img src="" alt="img" /> */}
-          <span>Add an avatar</span>
-        </label>
+        <div className='upd__form_ava'>
+          <input style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
+          <label htmlFor="file">
+            <BiCamera className='icon' />
+            <p className='text'>add an avatar</p>
+          </label>
+          <BiX className='close' onClick={() => {setImage(null)}}/>
+        </div>
+        
         <button>Update user</button>
       </form>
-      {image && <img className='image' src={image} alt="" />}
+      {image && <img className='upd__image' src={image} alt="" />}
     </div>
   )
 }

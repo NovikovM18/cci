@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate, Link } from 'react-router-dom';
 import { db, storage } from '../firebase';
 import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { BiCamera } from 'react-icons/bi';
+import { BiX } from 'react-icons/bi';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const displayName = event.target[0].value;
@@ -42,21 +46,33 @@ export default function SignUp() {
     }
   };
 
+  const filePreview = (event) => {
+    const objectUrl = URL.createObjectURL(event.target.files[0]);
+    setImage(objectUrl);
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='sUp'>
+      <form onSubmit={handleSubmit} className='sUp__form'>
         <input required type="text" placeholder="display name" />
         <input required type="email" placeholder="email" />
         <input required type="password" placeholder="password" />
-        <input required style={{ display: "none" }} type="file" accept="image/*" id="file" />
-        <label htmlFor="file">
-          {/* <img src="" alt="img" /> */}
-          <span>Add an avatar</span>
-        </label>
-        <button>Sign up</button>
+        <div className='sUp__form_ava'>
+          <input required style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
+          <label htmlFor="file">
+            <BiCamera className='icon' />
+            <p className='text'>add an avatar</p>
+          </label>
+          <BiX className='close' onClick={() => {setImage(null)}}/>
+        </div>
+        <button type='submit'>Sign up</button>
       </form>
 
-      <Link to='/login/signin'>Already have account? Go to sign in</Link>
+      <div className='sUp__links'>
+        <Link to='/login/signin' className='sUp__links_item'>Already have account? Go to sign in</Link>
+      </div>
+
+      {image && <img className='sUp__image' src={image} alt="" />}
     </div>
   )
 }

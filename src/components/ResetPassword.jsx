@@ -20,13 +20,14 @@ export default function ResetPassword() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='resP'>
+      <form onSubmit={handleSubmit} className='resP__form'>
         <input required type="email" placeholder="email" />
         <button>Reset password</button>
       </form>
-
-      <Link to='/login/signin'>Back to sign in</Link>
+      <div className='resP__links'>
+        <Link to='/login/signin' className='resP__links_item'>Back to sign in</Link>
+      </div>
     </div>
   )
 }
