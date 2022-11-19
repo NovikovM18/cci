@@ -77,7 +77,10 @@ export default function UpdateUser() {
   return (
     <div className='upd'>
       <form onSubmit={handleSubmit} className='upd__form'>
-        <input type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
+      <div className="Input">
+        <input id='input' className="Input-text" type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
+        <label htmlFor="input" className="Input-label">display name</label>
+      </div>
         <div className='upd__form_ava'>
           <input style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
           <label htmlFor="file">

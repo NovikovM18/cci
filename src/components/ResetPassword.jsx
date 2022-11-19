@@ -22,7 +22,10 @@ export default function ResetPassword() {
   return (
     <div className='resP'>
       <form onSubmit={handleSubmit} className='resP__form'>
-        <input required type="email" placeholder="email" />
+        <div className="Input">
+          <input id='input' className="Input-text" required type="email" placeholder="email" />
+          <label htmlFor="input" className="Input-label">email</label>
+        </div>
         <button>Reset password</button>
       </form>
       <div className='resP__links'>

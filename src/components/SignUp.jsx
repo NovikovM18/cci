@@ -54,9 +54,18 @@ export default function SignUp() {
   return (
     <div className='sUp'>
       <form onSubmit={handleSubmit} className='sUp__form'>
-        <input required type="text" placeholder="display name" />
-        <input required type="email" placeholder="email" />
-        <input required type="password" placeholder="password" />
+        <div className="Input">
+          <input id='input' className="Input-text" required type="text" placeholder="display name" />
+          <label htmlFor="input" className="Input-label">display name</label>
+        </div>
+        <div className="Input">
+          <input id='input1' className="Input-text" required type="email" placeholder="email" />
+          <label htmlFor="input1" className="Input-label">email</label>
+        </div>
+        <div className="Input">
+          <input id='input2' className="Input-text" required type="password" placeholder="password" />
+          <label htmlFor="input2" className="Input-label">password</label>
+        </div>
         <div className='sUp__form_ava'>
           <input required style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
           <label htmlFor="file">
