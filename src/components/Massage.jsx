@@ -11,7 +11,6 @@ export default function Massage({ message }) {
       querySnapshot.forEach((doc) => {
           u = doc.data();
       });
-      console.log(u);
       setSender(u);
     });
     return () => {

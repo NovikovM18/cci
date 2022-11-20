@@ -26,6 +26,7 @@ export default function Dashboard() {
         <LogOut />
 
         <div className="nav">
+          <NavLink className="nav__link" to='users'>users</NavLink>
           <NavLink className="nav__link" to='todos'>toDos</NavLink>
           <NavLink className="nav__link" to='chat'>chat</NavLink>
         </div>

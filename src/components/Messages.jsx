@@ -2,17 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { collection, getDocs, doc, onSnapshot, query, where, orderBy, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import Message from './Massage';
+import { async } from '@firebase/util';
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(query(collection(db, 'messages'), orderBy('timestamp', 'asc')), (querySnapshot) => {
-      const arr = [];
+      let arr = [];
       querySnapshot.forEach((doc) => {
-          arr.push(doc.data());
+        arr.push(doc.data());
+        
       });
       setMessages(arr);
+      setTimeout(() => {
+        document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
+      }, 1000)
     });
     return () => {
       unsubscribe();
@@ -20,11 +25,7 @@ export default function Messages() {
   }, [])
 
   useEffect(() => {
-    setTimeout(() => {
-      if (document.getElementById('end')) {
-        document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
-      }
-    }, '200')
+    document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
   }, [messages.length]);
 
   return (

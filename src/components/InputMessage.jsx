@@ -3,10 +3,13 @@ import { collection, addDoc, Timestamp, serverTimestamp } from "firebase/firesto
 import { db, storage } from '../firebase';
 import { auth } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { BiCamera } from 'react-icons/bi';
+import { BiX } from 'react-icons/bi';
 
 export default function InputMessage() {
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
+  const [images, setImages] = useState(null);
   const timestamp = Timestamp.now().toMillis();
 
   const handleSubmit = async (e) => {
@@ -15,7 +18,7 @@ export default function InputMessage() {
       await addDoc(collection(db, 'messages'), {
         text: text,
         senderId: auth.currentUser.uid,
-        id: auth.currentUser.displayName + timestamp,
+        id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
         timestamp: serverTimestamp(),
       }).then(() => {
       }).catch((error) => {
@@ -46,7 +49,7 @@ export default function InputMessage() {
               text: text,
               file: downloadURL,
               senderId: auth.currentUser.uid,
-              id: auth.currentUser.displayName + timestamp,
+              id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
               timestamp: serverTimestamp(),
             });
           } catch (error) {
@@ -57,36 +60,63 @@ export default function InputMessage() {
     }
     setText('');
     setFile(null);
+    setImages(null);
   };
 
-  // const filePreview = (event) => {
-  //   const objectUrl = URL.createObjectURL(event.target.files[0]);
-  //   setImage(objectUrl);
-  //   console.log(image);
-  // };
+  const filePreview = (event) => {
+    setFile(event.target.files[0])
+    const objectUrl = URL.createObjectURL(event.target.files[0]);
+    setImages(objectUrl);
+  };
+
+  const clearFiles = () => {
+    setFile(null);
+    setImages(null);
+  }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Write message..." 
-          value={text} onChange={(e) => setText(e.target.value)}
-        />
-        
-        <label htmlFor="file">
+    <div className='inM'>
+      <form onSubmit={handleSubmit} className='inM__form'>
+        <div className="input">
+          <input
+            className="input-text"
+            type="text" 
+            placeholder="Write message..." 
+            value={text} onChange={(e) => setText(e.target.value)}
+          />
+        </div>
+
+        {/* <div className='inM__images'>
+        {images.map((image, i) => (
+          <img className='inM__images_item' src={image} alt="" key={i}/>
+          ))}
+        </div> */}
+        {images && 
+        <div className='inM__images_item'>
+          <img src={images} alt=""/>
+          <BiX className='close' onClick={clearFiles}/>
+        </div>
+        }
+        <div className='inM__form_img'>
           <input 
             style={{ display: "none" }} 
             type="file"
             id="file"
             accept="image/*"
-            onChange={(e) => setFile(e.target.files[0])}
+            onChange={filePreview}
           />
-          {/* <img src="" alt="img" /> */}
-          <span>Add img</span>
-        </label>
+          <label htmlFor="file">
+            <BiCamera className='icon' />
+            {/* <p className='text'>add image</p> */}
+          </label>
+        </div>
 
-        <button disabled={!text && !file}>send</button>
+        <button
+          className={`button ${!text && !file ? 'button-disabled' : 'button-ok'}`}
+          disabled={!text && !file}
+        >
+          send
+        </button>
       </form>
     </div>
   )

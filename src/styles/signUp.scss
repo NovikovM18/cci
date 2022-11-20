@@ -63,7 +63,9 @@
 
   &__image {
     margin-top: 24px;
-    width: auto;
+    width: 25vh;
     height: 25vh;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }

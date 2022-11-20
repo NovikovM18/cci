@@ -12,25 +12,24 @@ export default function UpdateUser() {
   const navigate = useNavigate();
   const [name, setName] = useState(auth.currentUser.displayName);
   const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const displayName = e.target[0].value;
-    const file = e.target[1].files[0];
     if (!file) {
       await updateProfile(auth.currentUser, {
-        displayName: displayName,
+        displayName: name,
       });
       await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-        displayName: displayName
+        displayName: name
       }).then(() => {
         navigate(-1);
       }).catch((error) => {
         alert(error.message);
       });
-    } else if (!displayName) {
+    } else if (!name) {
       const date = Timestamp.now().toMillis();
-      const storageRef = ref(storage, `${displayName + '-avatar-' + date}`);
+      const storageRef = ref(storage, `${name + '-avatar-' + date}`);
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
@@ -46,18 +45,18 @@ export default function UpdateUser() {
           }
         });
       });
-    } else if (file && displayName) {
+    } else if (file && name) {
       const date = Timestamp.now().toMillis();
-      const storageRef = ref(storage, `${displayName + '-avatar-' + date}`);
+      const storageRef = ref(storage, `${name + '-avatar-' + date}`);
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             await updateProfile(auth.currentUser, {
-              displayName: displayName,
+              displayName: name,
               photoURL: downloadURL,
             });
             await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-              displayName: displayName,
+              displayName: name,
               photoURL: downloadURL,
             });
             navigate(-1);
@@ -70,6 +69,7 @@ export default function UpdateUser() {
   };
 
   const filePreview = (event) => {
+    setFile(event.target.files[0]);
     const objectUrl = URL.createObjectURL(event.target.files[0]);
     setImage(objectUrl);
   };
@@ -77,22 +77,31 @@ export default function UpdateUser() {
   return (
     <div className='upd'>
       <form onSubmit={handleSubmit} className='upd__form'>
-      <div className="Input">
-        <input id='input' className="Input-text" type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
-        <label htmlFor="input" className="Input-label">display name</label>
-      </div>
+        <div className="input">
+          <input id='input' className="input-text" type="text" placeholder="display name" value={name} onChange={(e) => {setName(e.target.value)}}/>
+          <label htmlFor="input" className="input-label">display name</label>
+        </div>
         <div className='upd__form_ava'>
           <input style={{ display: "none" }} type="file" accept="image/*" id="file" onChange={filePreview}/>
           <label htmlFor="file">
             <BiCamera className='icon' />
             <p className='text'>add an avatar</p>
           </label>
-          <BiX className='close' onClick={() => {setImage(null)}}/>
         </div>
         
-        <button>Update user</button>
+        <button 
+          className={`button ${!name? 'button-disabled' : 'button-ok'}`}
+          disabled={!name}
+        >
+          Update user
+        </button>
       </form>
-      {image && <img className='upd__image' src={image} alt="" />}
+      {image && 
+        <div className='upd__image'>
+          <img src={image} alt="" />
+          <BiX className='close' onClick={() => {setImage(null)}}/>
+        </div>
+      }
     </div>
   )
 }

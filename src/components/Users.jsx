@@ -8,11 +8,11 @@ export default function Users() {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(query(collection(db, 'users'), where("uid", "!=", auth.currentUser.uid)), (querySnapshot) => {
-      const arr = [];
       querySnapshot.forEach((doc) => {
-          arr.push(doc.data());
+        setUsers((prevUsers) => [
+          ...prevUsers, doc.data()
+        ]);
       });
-      setUsers(arr);
     });
     return () => {
       unsubscribe();

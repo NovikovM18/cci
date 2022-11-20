@@ -11,6 +11,7 @@ import SignUp from "./components/SignUp";
 import ToDo from "./components/ToDo";
 import ToDos from "./components/ToDos";
 import UpdateUser from "./components/UpdateUser";
+import Users from "./components/Users";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             } 
           >
             <Route path='updateuser' element={<UpdateUser />} />
+            <Route path='users' element={<Users />} />
             <Route path='chat' element={<Chat />} />
             <Route path='todos' element={<ToDos />}>
               <Route path=':id' element={<ToDo />} />

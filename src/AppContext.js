@@ -24,7 +24,6 @@ export default function AppContext({ children }) {
         user,
         setUser,
         loading,
-        setLoading
       }}
     >
       { children }
