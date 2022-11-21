@@ -7,7 +7,6 @@
 
   .logo {
     position: absolute;
-    box-sizing: border-box;
     top: 0;
     left: 0;
     width: 50px;
@@ -33,64 +32,81 @@
     }
   
     &:hover {
-      width: 75px;
-      height: 75px;
+      width: 60px;
+      height: 60px;
       border: 0px solid lightcoral;
       background-color: rgba(240, 128, 128, 1);
       box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
       transition: 300ms;
     }
     
-    &:hover > p{
-      font-size: 22px;
+    &:hover > p {
+      font-size: 18px;
       font-weight: 700;
       transition: 300ms;
     }
   }
 
   .links {
-    height: 36px;
-  }
-  .user-info {
-    margin: 0 auto;
-    padding: 2px 4px;
-    width: max-content;
-    height: max-content;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    color: #555;
-    border: 2px solid lightcoral;
-    border-radius: 8px;
-    background-color: rgba(240, 128, 128, 0.25);
-    cursor: pointer;
-      &:hover > p {
-        font-size: 22px;
-        font-weight: 700;
-        transition: 300ms;
-      }
-      &:hover > img {
-        width: 36px;
-        height: 36px;
-        transition: 300ms;
-      }
+    justify-content: space-between;
+    height: 36px;
 
-      img {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        object-fit: cover;
-        transition: 300ms;
-      }
-
-      p {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        transition: 300ms;
-      }
+    .user-info {
+      margin: 0 auto;
+      padding: 2px 4px;
+      width: max-content;
+      height: max-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      color: #555;
+      border: 2px solid lightcoral;
+      border-radius: 8px;
+      background-color: rgba(240, 128, 128, 0.25);
+      cursor: pointer;
+      transition: 300ms;
+        &:hover {
+          border: 2px solid lightcoral;
+          background-color: rgba(240, 128, 128, 0.5);
+          transition: 300ms;
+        }
+        &.active {
+          border: 2px solid lightcoral;
+          background-color: rgba(240, 128, 128, 1);
+          font-weight: 700;
+          transition: 300ms;
+        }
+        &:hover > p {
+          font-size: 18px;
+          font-weight: 700;
+          transition: 300ms;
+        }
+        &:hover > img {
+          width: 28px;
+          height: 28px;
+          transition: 300ms;
+        }
+  
+        img {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          object-fit: cover;
+          transition: 300ms;
+        }
+  
+        p {
+          margin: 0;
+          padding: 0;
+          font-size: 16px;
+          transition: 300ms;
+        }
+    }
   }
 
   .nav {
@@ -103,7 +119,6 @@
     gap: 4px;
 
       &__link {
-        box-sizing: border-box;
         padding: 4px;
         border: 2px solid lightcoral;
         border-radius: 4px;
@@ -114,11 +129,10 @@
           &:hover {
             border: 2px solid lightcoral;
             background-color: rgba(240, 128, 128, 0.5);
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             transition: 300ms;
           }
-          
           &.active {
             border: 2px solid lightcoral;
             background-color: rgba(240, 128, 128, 1);
@@ -129,6 +143,6 @@
   }
 
   .content {
-    margin-top: 40px;
+    margin-top: 16px;
   }
 }

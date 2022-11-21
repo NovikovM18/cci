@@ -12,7 +12,6 @@ export default function Messages() {
       let arr = [];
       querySnapshot.forEach((doc) => {
         arr.push(doc.data());
-        
       });
       setMessages(arr);
       setTimeout(() => {

@@ -6,17 +6,17 @@ export default function ToDos() {
 
   return (
     <div>
-    <div>
-      {todos.map((todo) => (
-        <Link
-          to={`/todos/${todo.id}`}
-          key={todo.id}
-        >
-          {todo.id}
-        </Link>
-      ))}
+      <div>
+        {todos.map((todo) => (
+          <Link
+            to={`/todos/${todo.id}`}
+            key={todo.id}
+          >
+            {todo.name}
+          </Link>
+        ))}
+      </div>
+      <Outlet />
     </div>
-    <Outlet />
-  </div>
   )
 }

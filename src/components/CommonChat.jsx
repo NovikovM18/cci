@@ -1,14 +1,11 @@
-import React from 'react'
-import { useParams } from "react-router-dom";
+import React from 'react';
 import Messages from './Messages';
 import InputMessage from './InputMessage';
 
-export default function Chat() {
-  let params = useParams();
+export default function CommonChat() {
 
   return (
     <div className='chat'>
-      {params.id}
       <div className='chat__messages'>
         <Messages />
         <InputMessage />
