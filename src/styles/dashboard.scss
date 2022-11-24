@@ -9,8 +9,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,7 +20,7 @@
     background-color: rgba(240, 128, 128, 0.25);
     border-radius: 50%;
     text-decoration: none;
-    color: #555;
+    color: #333;
     cursor: pointer;
     transition: 300ms;
 
@@ -32,8 +32,9 @@
     }
   
     &:hover {
-      width: 60px;
-      height: 60px;
+      z-index: 99;
+      width: 52px;
+      height: 52px;
       border: 0px solid lightcoral;
       background-color: rgba(240, 128, 128, 1);
       box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -41,7 +42,7 @@
     }
     
     &:hover > p {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       transition: 300ms;
     }
@@ -64,12 +65,13 @@
       align-items: center;
       gap: 4px;
       text-decoration: none;
-      color: #555;
+      color: #333;
       border: 2px solid lightcoral;
       border-radius: 8px;
       background-color: rgba(240, 128, 128, 0.25);
       cursor: pointer;
       transition: 300ms;
+
         &:hover {
           border: 2px solid lightcoral;
           background-color: rgba(240, 128, 128, 0.5);
@@ -124,21 +126,21 @@
         border-radius: 4px;
         background-color: rgba(240, 128, 128, 0.25);
         text-decoration: none;
-        color: #555;
+        color: #333;
         transition: 300ms;
-          &:hover {
-            border: 2px solid lightcoral;
-            background-color: rgba(240, 128, 128, 0.5);
-            font-size: 18px;
-            font-weight: 700;
-            transition: 300ms;
-          }
-          &.active {
-            border: 2px solid lightcoral;
-            background-color: rgba(240, 128, 128, 1);
-            font-weight: 700;
-            transition: 300ms;
-          }
+        &:hover {
+          border: 2px solid lightcoral;
+          background-color: rgba(240, 128, 128, 0.5);
+          font-size: 18px;
+          font-weight: 700;
+          transition: 300ms;
+        }
+        &.active {
+          border: 2px solid lightcoral;
+          background-color: rgba(240, 128, 128, 1);
+          font-weight: 700;
+          transition: 300ms;
+        }
       }
   }
 

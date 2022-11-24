@@ -4,27 +4,25 @@ import { db } from '../firebase';
 import Message from './Massage';
 import { async } from '@firebase/util';
 
-export default function Messages() {
+export default function Messages({ chatId }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(query(collection(db, 'messages'), orderBy('timestamp', 'asc')), (querySnapshot) => {
-      let arr = [];
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.data());
-      });
-      setMessages(arr);
-      setTimeout(() => {
-        document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
-      }, 1000)
+    const unsubscribe = onSnapshot(doc(db, 'chats', chatId), (doc) => {
+      setMessages(doc.data().messages);
+      // setTimeout(() => {
+      //   document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
+      // }, 1000)
     });
     return () => {
       unsubscribe();
     }
-  }, [])
+  }, [chatId])
 
   useEffect(() => {
-    document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
+    }, 1000)
   }, [messages.length]);
 
   return (

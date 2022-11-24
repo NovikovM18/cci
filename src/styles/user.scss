@@ -14,6 +14,7 @@
     border-radius: 8px;
     background-color: rgba(240, 128, 128, 0.25);
     cursor: pointer;
+    transition: 250ms;
   
     &_img {
       width: 24px;
@@ -29,13 +30,13 @@
     }
   
     &:hover {
-      border: 2px solid lightcoral;
       background-color: rgba(240, 128, 128, 0.5);
-      transition: 100ms;
+      transition: 250ms;
     }
   }
 
   &__actions {
+    height: 32px;
     display: flex;
     flex-direction: row;
     align-items: center;

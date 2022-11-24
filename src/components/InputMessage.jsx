@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { collection, addDoc, Timestamp, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, arrayUnion, Timestamp, serverTimestamp } from "firebase/firestore";
 import { db, storage } from '../firebase';
 import { auth } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { BiCamera } from 'react-icons/bi';
 import { BiX } from 'react-icons/bi';
 
-export default function InputMessage() {
+export default function InputMessage({ chatId }) {
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);
   const [images, setImages] = useState(null);
@@ -15,11 +15,13 @@ export default function InputMessage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      await addDoc(collection(db, 'messages'), {
-        text: text,
-        senderId: auth.currentUser.uid,
-        id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
-        timestamp: serverTimestamp(),
+      await updateDoc(doc(db, 'chats', chatId), {
+        messages: arrayUnion ({
+          text: text,
+          senderId: auth.currentUser.uid,
+          id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
+          // timestamp: serverTimestamp(),
+        })
       }).then(() => {
       }).catch((error) => {
         alert(error.message);
@@ -29,11 +31,13 @@ export default function InputMessage() {
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await addDoc(collection(db, 'messages'), {
-              file: downloadURL,
-              senderId: auth.currentUser.uid,
-              id: auth.currentUser.displayName + timestamp,
-              timestamp: serverTimestamp(),
+            await updateDoc(doc(db, 'chats', chatId), {
+              messages: arrayUnion ({
+                file: downloadURL,
+                senderId: auth.currentUser.uid,
+                id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
+                // timestamp: serverTimestamp(),
+              })
             });
           } catch (error) {
             alert(error.message);
@@ -45,12 +49,14 @@ export default function InputMessage() {
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await addDoc(collection(db, 'messages'), {
-              text: text,
-              file: downloadURL,
-              senderId: auth.currentUser.uid,
-              id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
-              timestamp: serverTimestamp(),
+            await updateDoc(doc(db, 'chats', chatId), {
+              messages: arrayUnion ({
+                text: text,
+                file: downloadURL,
+                senderId: auth.currentUser.uid,
+                id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
+                // timestamp: serverTimestamp(),
+              })
             });
           } catch (error) {
             alert(error.message);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import Messages from './Messages';
 import InputMessage from './InputMessage';
@@ -8,10 +8,9 @@ export default function Chat() {
 
   return (
     <div className='chat'>
-      {params.id}
       <div className='chat__messages'>
-        <Messages />
-        <InputMessage />
+        <Messages chatId={params.id}/>
+        <InputMessage chatId={params.id}/>
       </div>
     </div>
   )

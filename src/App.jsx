@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthGuard } from './AuthGuard';
 import Chat from "./components/Chat";
 import Chats from "./components/Chats";
-import CommonChat from "./components/CommonChat";
 import Dashboard from "./components/Dashboard";
 import LogIn from "./components/LogIn";
 import LoginStart from "./components/LoginStart";
@@ -36,7 +35,6 @@ function App() {
           >
             <Route path='updateuser' element={<UpdateUser />} />
             <Route path='users' element={<Users />} />
-            <Route path='common-chat' element={<CommonChat />} />
             <Route path='chats' element={<Chats />}>
               <Route path=':id' element={<Chat />} />
             </Route>

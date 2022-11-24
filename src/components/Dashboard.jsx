@@ -28,7 +28,6 @@ export default function Dashboard() {
         <div className="nav">
           <NavLink className="nav__link" to='users'>users</NavLink>
           <NavLink className="nav__link" to='todos'>toDos</NavLink>
-          <NavLink className="nav__link" to='common-chat'>common chat</NavLink>
           <NavLink className="nav__link" to='chats'>chats</NavLink>
         </div>
 

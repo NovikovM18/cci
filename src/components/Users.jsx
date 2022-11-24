@@ -28,7 +28,7 @@ export default function Users() {
   } else if (!loading) {
     return (
       <div className='users'>
-        <p className='users__title'>users:</p>
+        {/* <p className='users__title'>users:</p> */}
         {users.map(user => (
           <User user={user} key={user.uid}/>
         ))}
