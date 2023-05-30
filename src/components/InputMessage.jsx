@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, addDoc, doc, updateDoc, arrayUnion, Timestamp, serverTimestamp } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
 import { db, storage } from '../firebase';
 import { auth } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -20,7 +20,7 @@ export default function InputMessage({ chatId }) {
           text: text,
           senderId: auth.currentUser.uid,
           id: auth.currentUser.displayName + timestamp + Math.random().toFixed(5),
-          // timestamp: serverTimestamp(),
+          timestamp: Timestamp.fromDate(new Date(Date.now())),
         })
       }).then(() => {
       }).catch((error) => {

@@ -10,6 +10,7 @@ export default function AppContext({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log('UUUUUUUUUU',user);
       setUser(user);
       setLoading(false);
     });

@@ -15,6 +15,7 @@ export default function Users() {
       querySnapshot.forEach((doc) => {
         arr.push(doc.data());
       });
+      console.log(arr);
       setUsers(arr);
       setLoading(false);
     });

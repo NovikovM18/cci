@@ -10,7 +10,7 @@ import { BiX } from 'react-icons/bi';
 
 export default function UpdateUser() {
   const navigate = useNavigate();
-  const [name, setName] = useState(auth.currentUser.displayName);
+  const [name, setName] = useState(auth.currentUser.displayName || '');
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
 

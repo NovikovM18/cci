@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { collection, getDocs, doc, onSnapshot, query, where, orderBy, serverTimestamp, Timestamp } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import Message from './Massage';
-import { async } from '@firebase/util';
 
 export default function Messages({ chatId }) {
   const [messages, setMessages] = useState([]);
@@ -10,9 +9,6 @@ export default function Messages({ chatId }) {
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'chats', chatId), (doc) => {
       setMessages(doc.data().messages);
-      // setTimeout(() => {
-      //   document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
-      // }, 1000)
     });
     return () => {
       unsubscribe();
